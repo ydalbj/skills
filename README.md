@@ -8,13 +8,17 @@
 
 ### Tools
 
+- 配置 Configuration
+
+    * [.editorconfig](https://github.com/ydalbj/skills/blob/master/Tools/Configuration)
+    * PHP CodeSniffer pre-commit hook for git:[pre-commit](https://github.com/ydalbj/skills/blob/master/Tools/Configuration)
+        > 注：pre-commit 文件复制到项目目录 /path/to/.git/hooks 目录中
+
+- 开发环境 DevelopEnvironment
+
+    * [Laragon](https://github.com/ydalbj/skills/blob/master/Tools/DevelopEnvironment/laragon.md)
+
 - 远程控制 RemoteControl
 
     * [Team Viewer](https://github.com/ydalbj/skills/blob/master/Tools/RemoteControl/team-viewer.md)
     * [VNC Viewer](https://github.com/ydalbj/skills/blob/master/Tools/RemoteControl/vnc-viewer.md)
-
-- 配置 Configuration
-    * [editorconfig](https://github.com/ydalbj/skills/blob/master/Tools/Configuration)
-
-- 开发环境 DevelopEnvironment
-    * [Laragon](https://github.com/ydalbj/skills/blob/master/Tools/DevelopEnvironment/laragon.md)
