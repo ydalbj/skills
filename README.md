@@ -18,6 +18,8 @@
 
     * [Laragon](https://github.com/ydalbj/skills/blob/master/Tools/DevelopEnvironment/laragon.md)
 
+- 编辑器 Editors
+    * [VSCode](https://github.com/ydalbj/skills/blob/master/Tools/Editors/VSCode)
 - 远程控制 RemoteControl
 
     * [Team Viewer](https://github.com/ydalbj/skills/blob/master/Tools/RemoteControl/team-viewer.md)
