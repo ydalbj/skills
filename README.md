@@ -1,5 +1,10 @@
 ## 个人技能整理
 
+    持续更新中...
+
+### Mysql
+* [语句语法](https://github.com/ydalbj/skills/blob/master/Mysql/statement.md)
+
 ### PHP
 
 - Laravel
@@ -20,6 +25,7 @@
 
 - 编辑器 Editors
     * [VSCode](https://github.com/ydalbj/skills/blob/master/Tools/Editors/VSCode)
+
 - 远程控制 RemoteControl
 
     * [Team Viewer](https://github.com/ydalbj/skills/blob/master/Tools/RemoteControl/team-viewer.md)
