@@ -3,12 +3,15 @@
 ##### 准备
 
 * Fira Code需要先安装，参考 [Fira Code](https://github.com/ydalbj/skills/blob/master/Tools/Editors/VSCode/font.md)
+* VS Code sync 同步设置及扩展
+    > 注： "sync.gist": "1dfe38eeee48e0439e61a764c25b4dab"
 * PHP CS安装 TODO
 * WSL安装 TODO
 
 ##### 设置
 ```json
 {
+    "sync.gist": "1dfe38eeee48e0439e61a764c25b4dab",
     "phpcs.standard": "PSR2",
     "vim.disableAnnoyingNeovimMessage": true,
     "window.zoomLevel": 1,
