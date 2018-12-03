@@ -14,7 +14,7 @@ if ! [ -x "$(command -v php)" ]; then
   # 中途按下回车,添加源
   sudo add-apt-repository ppa:ondrej/php
   sudo apt-get update
-  sudo apt-get install -y php7.2 php7.2-mysql php7.2-curl php7.2-xml php7.2-json php7.2-gd php7.2-mbstring
+  sudo apt-get install -y php7.2 php7.2-fpm php7.2-mysql php7.2-curl php7.2-xml php7.2-json php7.2-gd php7.2-mbstring
 
   # install pecl
   sudo apt-get install php-dev php-pear autoconf automake libtool  -y

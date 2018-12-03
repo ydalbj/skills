@@ -10,6 +10,11 @@
 - Laravel
     * [效率提升技巧](https://github.com/ydalbj/skills/blob/master/PHP/Laravel/efficiency-recipes.md)
 
+### Linux
+
+- 安装 Installation
+    * [软件安装](https://github.com/ydalbj/skills/blob/master/Linux/Installation/soft.md)
+    * [自动安装脚本](https://github.com/ydalbj/skills/blob/master/Linux/Installation)
 
 ### Tools
 

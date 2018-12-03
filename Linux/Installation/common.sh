@@ -34,7 +34,7 @@ if ! [ -x "$(command -v zsh)" ]; then
   echo "----------install Zsh----------"
   sudo apt install zsh -y
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-  echo "----------Git installed----------"
+  echo "----------Zsh installed----------"
 fi
 
 if ! [ -x "$(command -v fluxgui)" ]; then
@@ -44,4 +44,11 @@ if ! [ -x "$(command -v fluxgui)" ]; then
   sudo apt update
   sudo apt install fluxgui -y
   echo "----------f.lux installed----------"
+fi
+
+if ! [ -x "$(command -v composer)" ]; then
+  # install composer
+  echo "----------install composer----------"
+  sudo apt install composer -y
+  echo "----------composer installed----------"
 fi
