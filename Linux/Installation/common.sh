@@ -26,6 +26,7 @@ if ! [ -x "$(command -v git)" ]; then
   git config --global alias.unstage "reset HEAD"
   git config --global alias.last "log -l"
   git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+  git config --global pull.rebase true
   echo "----------Git installed----------"
 fi
 
@@ -50,5 +51,6 @@ if ! [ -x "$(command -v composer)" ]; then
   # install composer
   echo "----------install composer----------"
   sudo apt install composer -y
+  composer config -g repo.packagist composer https://packagist.laravel-china.org
   echo "----------composer installed----------"
 fi
