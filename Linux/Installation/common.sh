@@ -4,13 +4,7 @@ name="liuhui"
 email="liuhuidut@sina.com"
 
 sudo apt update
-
-if ! [ -x "$(command -v vim)" ]; then
-  # install Vim
-  echo "----------install Vim----------"
-  sudo apt install vim -y
-  echo "----------Vim installed----------"
-fi
+sudo apt install vim axel proxychains -y
 
 if ! [ -x "$(command -v git)" ]; then
   # install Git
@@ -52,5 +46,12 @@ if ! [ -x "$(command -v composer)" ]; then
   echo "----------install composer----------"
   sudo apt install composer -y
   composer config -g repo.packagist composer https://packagist.laravel-china.org
+  echo "----------composer installed----------"
+fi
+
+if ! [ -x "$(command -v axel)" ]; then
+  # install axel (command line download accelerator)
+  echo "----------install composer----------"
+  sudo apt install axel -y
   echo "----------composer installed----------"
 fi

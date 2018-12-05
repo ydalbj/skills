@@ -5,3 +5,4 @@
 ./github-ssh.sh
 ./nginx.sh
 ./php.sh
+./docker.sh
