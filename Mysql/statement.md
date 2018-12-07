@@ -1,12 +1,12 @@
 ## Mysql语句语法技巧
 
+### 参考链接
+[database guide](https://database.guide/)
+[mysql中concat 和 group_concat()的用法](https://www.cnblogs.com/zhming26/p/6382995.html)
 
-##### 函数
+### 函数
 
 - CONCAT, CONCAT_WS, GROUP_CONCAT
-
-    参考链接 [mysql中concat 和 group_concat()的用法](https://www.cnblogs.com/zhming26/p/6382995.html)
-
 
     * CONCAT
     ```mysql
