@@ -25,3 +25,13 @@
     ```
     > 注：使用这个特性时，关联表id 字段以及主表外键字段是必须列出的。
 
+- whereIn()查询，按照数组参数顺序排序
+    ```php
+    $products = Product::query()
+    ->whereIn('id', $productIds)
+    // orderByRaw 可以让我们用原生的 SQL 来给查询结果排序
+    ->orderByRaw(sprintf("FIND_IN_SET(id, '%s')", join(',', $productIds)))
+    ->get();
+    ```
+
+
