@@ -50,3 +50,42 @@ TODO
 
 * MySQL在 5.5.3 之后增加了 utf8mb4 字符编码，mb4即 most bytes 4。简单说 utf8mb4 是 utf8 的超集并完全兼容utf8，能够用四个字节存储更多的字符。
 [MySQL使用utf8mb4经验总结](http://seanlook.com/2016/10/23/mysql-utf8mb4/)
+
+##### InnoDB表空间
+> MySQL 5.6 版之前的 InnoDB 不支持独立表空间。
+
+* 系统表空间 (system tablespace)
+    - innodb_file_per_table 为 OFF
+    - 所有表所有数据统一存储,存储文件名 ibdata*
+    - 系统表空间存储以下内容
+        - InnoDB Data Dictionary
+        - doublewrite buffer, the change buffer, and undo logs
+        - table and index data
+
+* 独立表空间 (file-per-table tablespace)
+    - innodb_file_per_table 为 ON
+    - 每个表有自己的独立表空间，每个表的数据和索引单独存储
+
+* 共享通用表空间 (general tablespace)
+    - 通过`CREATE TABLESPACE` 语法创建
+    - 和系统表空间类似，通用表空间也是在多个表共享表空间存储数据
+    - General tablespaces have a potential memory advantage over file-per-table tablespaces. The server keeps tablespace metadata in memory for the lifetime of a tablespace. Multiple tables in fewer general tablespaces consume less memory for tablespace metadata than the same number of tables in separate file-per-table tablespaces.
+    - General tablespace data files may be placed in a directory relative to or independent of the MySQL data directory, which provides you with many of the data file and storage management capabilities of file-per-table tablespaces. As with file-per-table tablespaces, the ability to place data files outside of the MySQL data directory allows you to manage performance of critical tables separately, setup RAID or DRBD for specific tables, or bind tables to particular disks, for example
+    - General tablespaces support both Antelope and Barracuda file formats, and therefore support all table row formats and associated features. With support for both file formats, general tablespaces have no dependence on innodb_file_format or innodb_file_per_table settings, nor do these variables have any effect on general tablespaces.
+    - The TABLESPACE option can be used with CREATE TABLE to create tables in a general tablespaces, file-per-table tablespace, or in the system tablespace
+    - The TABLESPACE option can be used with ALTER TABLE to move tables between general tablespaces, file-per-table tablespaces, and the system tablespace. Previously, it was not possible to move a table from a file-per-table tablespace to the system tablespace. With the general tablespace feature, you can now do so.
+    - Creating a general tablespace in the data directory:
+    ```sql
+    mysql> CREATE TABLESPACE `ts1` ADD DATAFILE 'ts1.ibd' Engine=InnoDB;
+    ```
+    - Creating a general tablespace in a directory outside of the data directory:
+    ```sql
+    mysql> CREATE TABLESPACE `ts1` ADD DATAFILE '/my/tablespace/directory/ts1.ibd' Engine=InnoDB;
+    ```
+    - Adding Tables to a General Tablespace
+    ```sql
+    mysql> CREATE TABLE t1 (c1 INT PRIMARY KEY) TABLESPACE ts1;
+    mysql> ALTER TABLE t2 TABLESPACE ts1;
+    ```
+
+    > Support for adding table partitions to shared tablespaces was deprecated in MySQL 5.7.24 and will be removed in a future MySQL version. Shared tablespaces include the InnoDB system tablespace and general tablespaces.
