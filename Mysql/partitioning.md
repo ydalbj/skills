@@ -14,15 +14,30 @@
 ### prepare
 * 从5.1版本开始支持分区,可以通过以下方式检查是否支持分区。
 
-    before MySQL5.6
-    ```sql
-    SELECT variable_value FROM information_schema.global_variables WHERE variable_name = 'have_partitioning';
-    ```
+    - before MySQL5.6
+        ```sql
+        SELECT variable_value FROM information_schema.global_variables WHERE variable_name = 'have_partitioning';
+        ```
+        or
 
-    MySQL 5.6+
-    ```sql
-    SELECT plugin_status FROM information_schema.plugins WHERE plugin_name = 'partition';
-    ```
+        ```sql
+        SHOW VARIABLES LIKE '%partition%';
+        ```
+
+    - MySQL 5.6+
+        ```sql
+        SELECT plugin_status FROM information_schema.plugins WHERE plugin_name = 'partition';
+        ```
+        or
+
+        ```sql
+        SELECT PLUGIN_NAME as Name, PLUGIN_VERSION as Version, PLUGIN_STATUS as Status FROM INFORMATION_SCHEMA.PLUGINS WHERE PLUGIN_TYPE='STORAGE ENGINE';
+        ```
+
+        or
+        ```sql
+        SHOW PLUGINS;
+        ```
 
     确保结果是`yes`或`active`
 
