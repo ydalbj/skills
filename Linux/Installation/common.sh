@@ -55,3 +55,11 @@ if ! [ -x "$(command -v axel)" ]; then
   sudo apt install axel -y
   echo "----------composer installed----------"
 fi
+
+if ! test -d ~/.vim_runtime
+then
+  echo "----------install awesome vimrc----------"
+  git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+  sh ~/.vim_runtime/install_awesome_vimrc.sh
+  echo "----------awesome vimrc installed----------"
+fi
