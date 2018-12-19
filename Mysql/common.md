@@ -1,6 +1,12 @@
 ## 常用技巧
 
-##### 查询
+##### DML
+  DDL(data manipulation language):SELECT、UPDATE、INSERT、DELETE
+
+* `REPLACE INTO` 
+
+  > 必须有主键或唯一索引，存在则更新，不存在则插入。更新时会删除原纪录，再插入新纪录。所以更新一行，影响行数是2。
+
 * `SQL_CALC_FOUND_ROWS`,`FOUND_ROWS()`的使用
 
   ```sql
@@ -10,6 +16,8 @@
   ```
   第二个`SELECT`语句返回一个数字，表示如果没有`LIMIT`子句，第一个`SELECT`返回多少行。
   如果不使用`SQL_CALC_FOUND_ROWS`参数，第二个语句返回的是`LIMIT`限制的行数。
+
+##### 
 
 ##### 字符编码
 * `Character Sets` and `Collations`
