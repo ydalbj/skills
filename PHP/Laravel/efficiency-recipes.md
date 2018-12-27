@@ -34,4 +34,13 @@
     ->get();
     ```
 
+- `chunkById` vs `chunk`
+
+  * `chunkById` 移动`id`起始位置和`limit`来分片;
+  ```sql
+  SELECT * FROM users WHERE id > ? ORDER BY id LIMIT 100;
+  ```
+  * `chunk` 使用`offset`分片;当offset越大，性能越低;所以`chunkById性能较好`
+
+  [Laravel Database——查询构造器与语法编译器源码分析 (中)](https://laravel-china.org/articles/6249/laravel-database-query-constructor-and-syntax-compiler-source-code-analysis-in?order_by=vote_count&)
 
