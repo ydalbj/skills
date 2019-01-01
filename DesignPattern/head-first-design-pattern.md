@@ -1,6 +1,6 @@
-### Head first设计模式总结
+# Head first设计模式总结
 
-##### 设计原则
+## 设计原则
 * 找出应用中可能需要变化之处，把它们独立出来，不要和那些不需要变化的代码混在一起
 * 针对接口编程，而不是针对实现编程
 
@@ -44,17 +44,17 @@
   > 尽量不要覆盖基类中已实现的方法
 
 
-##### 设计模式
+## 设计模式
 
-* 策略模式(Strategy)
+##### 策略模式(Strategy)
 
   > 策略模式定义了算法族(a family of algorithms)，分别分装起来，可以互相替换。此模式让算法的变化独立于使用算法的客户(对象)。
 
-* 观察者模式(Observer)
+##### 观察者模式(Observer)
 
   > 观察者模式定义了对象之间的一对多依赖，当一个对象改变状态时，它的所有依赖者都会收到通知并自动更新。
 
-* 装饰者模式
+##### 装饰者模式
 
   > 装饰者模式动态地将责任附加到对象上。若要扩展功能，装饰者提供了比继承更有弹性的替代方案。
 
@@ -64,7 +64,7 @@
   - 装饰者可以在所委托被装饰者的行为之前与/或之后，加上自己的行为，以达到特定的目的。
   - 对象可以在任何时候被装饰，所以可以在运行时动态地，不限量地用你喜欢的装饰者来装饰对象。
 
-* 工厂模式
+##### 工厂模式
 
   - 简单工厂:封装一组类的创建
     > 简单工厂其实称不上是一个设计模式，算是一种编程习惯。
@@ -75,7 +75,75 @@
 
     > 抽象工厂允许客户程序使用抽象的接口来创建一组相关的产品，而不需要知道实际产出的具体产品是什么。这样，客户程序就从具体的产品中解耦。
 
+##### 单例模式(Singleton Pattern)
 
+  > 单例模式确保一个类只有一个实例，并提供一个全局访问点
+
+  * 处理多线程 (synchronized)
+
+    ```java
+    public class Singleton
+    {
+      private static Singleton uniqueInstance;
+
+      private Singleton() {}
+
+      public static synchronized Singleton getInstance()
+      {
+        if (uniqueInstance == null) {
+          uniqueInstance = new Singleton();
+        }
+
+        return uniqueInstance;
+      }
+    }
+    ```
+
+    > 但是同步方法会降低程序执行效率
+
+    1. 如果对性能要求不高，使用同步方法
+
+    2. 预先创建实例，而不是延迟实例化
+
+      > 如果应用程序总是创建并使用单件实例，或是在创建和运行时负担(内存)不大，可以预先创建实例。
+
+        ```java
+        public class Singleton
+        {
+          private static Singleton uniqueInstance = new Singleton();
+
+          private Singleton() {}
+
+          public static Singleton getInstance() {
+            return uniqueInstance;
+          }
+        }
+        ```
+
+    3. `双重检查加锁`，在getInstance()中使用同步
+
+        ```java
+        public class Singleton
+        {
+          private volatile Singleton uniqueInstance;
+
+          private Singleton() {}
+
+          public static Singleton getInstance() {
+            if (uniqueInstance == null) {
+              synchronized (Singleton.class) {
+                if (uniqueInstance == null) {
+                  uniqueInstance = new Singleton();
+                }
+              }
+            }
+
+            return uniqueInstance;
+          }
+        }
+        ```
+
+        > `volatile`关键词确保，当uniqueInstance变量被初始化成Singleton实例时，多个线程正确地处理uniqueInstance变量
 
 
 
