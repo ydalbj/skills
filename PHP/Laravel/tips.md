@@ -1,4 +1,4 @@
-## 提升效率技巧
+## Laravel Tips
 
 > 参考链接 [Laravel学院](https://laravelacademy.org/post/8203.html)
 
