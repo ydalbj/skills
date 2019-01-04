@@ -480,3 +480,58 @@
     $container->make(Database::class);
     var_dump($container->resolved(Database::class)); // true
     ```
+
+### Facades
+
+  > Facades 为应用的 服务容器 提供了一个「静态」 接口
+
+  > Laravel Facades 实际是服务容器中底层类的 「静态代理」 ，相对于传统静态方法，在使用时能够提供更加灵活、更加易于测试、更加优雅的语法
+
+##### 何时使用 Facades
+
+  * 优点
+
+    - 简单，易记的语法，从而无需手动注入或配置长长的类名
+
+    - 由于他们对 PHP 静态方法的独特调用，使得测试起来非常容易
+
+  * 缺点
+
+    - 会引起类作用范围的膨胀。
+
+      > 由于 Facades 使用起来非常简单并且不需要注入，就会使得我们不经意间在单个类中使用许多 Facades ，从而导致类变得越来越大。然而使用依赖注入的时候，使用的类越多，构造方法就会越长，在视觉上注意到这个类有些庞大了。因此在使用 Facades 的时候，要特别注意控制类的大小，让类的作用范围保持短小。
+
+    - 在开发与 Laravel 进行交互的第三方扩展包时，最好选择注入 Laravel 契约 而不使用 Facades 。因为扩展包是在 Laravel 之外构建，你无法使用 Laravel Facades 测试辅助函数
+
+##### Facades Vs. 依赖注入
+
+  > 依赖注入的主要优点之一是切换注入类的实现。这在测试的时候很有用，因为你可以注入一个 模拟或 stub ，并断言 stub 上调出各种方法
+
+  > 通常，真正的静态方法是不可能模拟或 stub 的。但是 Facades 使用动态方法对服务容器中解析出来的对象方法的调用进行了代理，我们也可以像测试注入类实例一样测试 Facades。
+
+  ```php
+    use Illuminate\Support\Facades\Cache;
+
+    ...
+      // Mock Cache Facades
+      Cache::shouldReceive('get')
+         ->with('key')
+         ->andReturn('value');
+    ...
+  ```
+
+##### Facades Vs. 辅助函数
+
+  > `cache('key');` 相当于 `Cache::get('key');`。在底层实现，辅助函数 cache 实际是调用 Cache 这个 Facade 的 get 方法。
+
+##### Facades 工作原理
+
+  * Facade基类使用了__callStatic()魔术方法
+
+  * `getFacadeAccessor()`方法返回服务容器绑定的名称
+
+    ```php
+    protected static function getFacadeAccessor() { return 'cache'; }
+    ```
+
+    > 当用户调用CacheFacade 中的任何静态方法时，Laravel 会从 服务容器 中解析cache绑定以及该对象运行所请求的方法（在这个例子中就是get方法）
