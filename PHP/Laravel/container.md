@@ -50,6 +50,85 @@
 
 ### Container
 
+##### Laravel Container
+
+  * 几乎所有的服务容器绑定都是在 服务提供器
+
+  * 如果类没有依赖任何接口，就没有必要将类绑定到容器中。
+
+  * 在服务提供器中，你总是可以通过 $this->app 属性访问容器。
+
+  * 解析实例:使用 make 方法从容器中解析出类实例。如果你的代码处于无法访问 $app 变量的位置，则可用全局辅助函数 resolve($name) 或 app($name)来解析。
+
+  * 服务提供器是所有 Laravel 应用程序的引导中心，是配置应用程序的中心。引导可以理解为注册，比如注册服务容器绑定，事件监听器，中间件，甚至是路由。
+
+    - `$app` 属性
+
+      > 在服务提供器中可以通过`$this->app`访问服务容器
+
+    - 服务提供器有两个方法`register`和`boot`
+
+    - `register`方法
+
+      > 在 register 方法中， 你只需要将事物绑定到 服务容器。而不要尝试在 register 方法中注册任何监听器，路由，或者其他任何功能
+
+      - `bindings` 和 `singletons` 特性
+
+        > 如果你的服务提供器注册了许多简单的绑定，你可能想用 bindings 和 singletons 属性替代手动注册每个容器绑定。当服务提供器被框架加载时，将自动检查这些属性并注册相应的绑定
+
+        ```php
+        // 设定所有的容器绑定的对应关系
+        public $bindings = [
+            ServerProvider::class => DigitalOceanServerProvider::class,
+        ];
+
+        // 设定所有的单例模式容器绑定的对应关系
+        public $singletons = [
+          DowntimeNotifier::class => PingdomDowntimeNotifier::class,
+        ];
+
+        ```
+
+    - `boot`方法
+
+      > 该方法在所有服务提供者被注册以后才会被调用
+
+      > Boot 方法的依赖注入
+
+      ```php
+      public function boot(ResponseFactory $response)
+      {
+          $response->macro('caps', function ($value) {
+              //
+          });
+      }
+      ```
+
+  * 注册服务提供者
+
+    > 通过配置文件 config/app.php 进行注册
+
+    > 通过composer.json文件注册
+
+  * 延迟服务提供者
+
+    > 如果你的服务提供者 仅 在 服务容器 中注册，可以选择延迟加载该绑定直到注册绑定的服务真的需要时再加载，延迟加载这样的一个提供者将会提升应用的性能，因为它不会在每次请求时都从文件系统加载。
+
+    > Laravel 编译并保存延迟服务提供者提供的所有服务的列表，以及其服务提供者类的名称。因此，只有当你在尝试解析其中一项服务时，Laravel 才会加载服务提供者
+
+    > 要延迟加载一个提供者，设置 defer 属性为 true 并设置一个 provides 方法。 provides 该方法返回该提供者注册的服务容器绑定
+
+    ```php
+    protected $defer = true;
+
+    ...
+
+    public function provides()
+    {
+        return [Connection::class];
+    }
+    ```
+
 ##### 在 Laravel 之外使用 Illuminate\Container
 
   ```shell
@@ -252,7 +331,7 @@
 
     return $controller->index($posts);
   });
-  
+
 
   $container->call('PostController@index');
   $container->call('PostController', [], 'index');
@@ -348,14 +427,14 @@
     public function __construct(Database $db, int $id) { /* ... */ }
   }
 
-  ... 
+  ...
 
   $post1 = $container->makeWith(Post::class, ['id' => 1]);
   $post2 = $container->makeWith(Post::class, ['id' => 2]);
   ```
 
   注意：Laravel 5.3 及以下使用 make($class, $parameters)。Laravel 5.4 中移除了此方法，但是在 5.4.16 以后又重新加回来了 makeWith() 。详见[PR](https://github.com/laravel/framework/pull/19201)
-  
+
 
 ##### 其他常用方法
 
@@ -386,7 +465,7 @@
 
     ```php
     $container->bindIf(Loader::class, FallbackLoader::class, true);
-    
+
     // 相当于
     if (! $container->bound(Loader::class)) {
       $container->singleton(Loader::class, FallbackLoader::class);
