@@ -20,3 +20,19 @@
     ```shell
     $ tar cvfz data.tar.gz data > /dev/null&
     ```
+
+* tee
+
+    > 可以从标准输入中读入信息并将其写入标准输出或文件中
+
+    ```shell
+    $ sudo echo ‘1′ > ip_forward
+    bash: ip_forward: Permission denied
+
+    # 解决方法
+    $ sudo sh -c ‘echo 1 > ip_forward’
+
+    # 或
+    $ echo ‘1′ | sudo tee ip_forward
+    # 或
+    $ echo ‘1′ | sudo tee ip_forward | cat > /dev/null
