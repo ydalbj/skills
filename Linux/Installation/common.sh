@@ -15,6 +15,9 @@ fi
 
   git config --global user.name ${name}
   git config --global user.email ${email}
+  git config --global credential.helper=store
+  git config --global core.safecrlf=true
+  git config --global core.autocrlf=false
   git config --global core.editor vim
   git config --global alias.st status
   git config --global alias.co checkout
