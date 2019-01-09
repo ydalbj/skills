@@ -26,6 +26,15 @@ fi
 sudo apt-get update
 sudo apt-get install docker-ce -y
 
+# 安装docker-compose
+echo "dont forget to change version of docker-compose and docker-machine"
+sudo curl -L https://github.com/docker/compose/releases/download/1.23.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+curl -L https://github.com/docker/machine/releases/download/v0.16.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine  && \
+    chmod +x /tmp/docker-machine && \
+    sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
+
 
 # 默认情况下，docker 命令会使用 Unix socket 与 Docker 引擎通讯。
 # 而只有 root 用户和 docker 组的用户才可以访问 Docker 引擎的 Unix socket。
