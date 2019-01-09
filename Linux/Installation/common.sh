@@ -4,7 +4,8 @@ name="liuhui"
 email="liuhuidut@sina.com"
 
 sudo apt update
-sudo apt install vim axel proxychains -y
+# vim-gnome 支持系统剪贴板
+sudo apt install vim vim-gnome axel proxychains -y
 
 if ! [ -x "$(command -v git)" ]; then
   # install Git
@@ -15,9 +16,9 @@ fi
 
   git config --global user.name ${name}
   git config --global user.email ${email}
-  git config --global credential.helper=store
-  git config --global core.safecrlf=true
-  git config --global core.autocrlf=false
+  git config --global credential.helper store
+  git config --global core.safecrlf true
+  git config --global core.autocrlf false
   git config --global core.editor vim
   git config --global alias.st status
   git config --global alias.co checkout
