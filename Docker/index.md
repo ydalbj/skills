@@ -28,6 +28,7 @@
       ```
 
     - 运行容器应用
+
       ```shell
       $ docker run -p repository
       ```
@@ -53,4 +54,69 @@
 
       ```shell
       $ docker run -p 4000:80 username/repository:tag
+      ```
+
+  * 服务(service)
+
+    > 服务实际上只是“生产环境中的容器”。服务只运行一个镜像(image)，编码镜像运行的方式（端口，容器副本数量等）。
+
+    - `docker-compose.yml`文件
+
+      ```yml
+      version: "3"
+      services:
+        web:
+          # replace username/repo:tag with your name and image details
+          image: username/repo:tag
+          deploy:
+            replicas: 5
+            resources:
+              limits:
+                cpus: "0.1"
+                memory: 50M
+            restart_policy:
+              condition: on-failure
+          ports:
+            - "4000:80"
+          networks:
+            - webnet
+      networks:
+        webnet:
+      ```
+
+    - 运行应用
+
+      > 下列命令启动一个single service stack，运行5个容器实例(docker-compose.yml文件配置)
+
+      ```shell
+      $ docker swarm init
+      $ docker stack deploy -c docker-compose.yml getstartedlab
+      ```
+
+      > 查看service
+      ```shell
+      $ docker service ls
+      ```
+
+      > 查看sevice task(在一个service里运行的单个容器称为task)
+      ```shell
+      $ docker service ps getstartedlab_web
+      ```
+
+      > 查看所有task
+      ```shell
+      $ docker container ls -q
+      ```
+
+      > 扩展service,执行以下命令，docker就地更新，无需拆除stack，或杀死任何容器
+
+      ```shell
+      $ docker stack deploy -c docker-compose.yml getstartedlab
+      ```
+
+      > Take down the app and the swarm
+
+      ```shell
+      $ docker stack rm getstartedlab
+      $ docker swarm leave --force
       ```
