@@ -182,3 +182,9 @@
         $ docker-machine env myvm1
         $ eval $(docker-machine env myvm1)
         ```
+
+    - 然后在Swarm manager机器上执行 docker stack deply及其它docker操作
+
+  * Stacks
+
+    Stack是一组相互关联的Service，它们共享依赖关系，并且可以协调和规划在一起
