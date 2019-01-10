@@ -51,6 +51,8 @@ if ! [ -x "$(command -v composer)" ]; then
   echo "----------install composer----------"
   sudo apt install composer -y
   composer config -g repo.packagist composer https://packagist.laravel-china.org
+  composer global require "squizlabs/php_codesniffer=*"
+  composer global require friendsofphp/php-cs-fixer
   echo "----------composer installed----------"
 fi
 
