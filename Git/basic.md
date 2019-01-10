@@ -80,3 +80,27 @@
 
 
   [参考链接](https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting)
+
+##### 合并
+
+* Git合并特定commits 到另一个分支
+
+  - 合并某个分支上的单个commit
+
+    先用git log 查看你想合并的commit id，然后检出到你要执行合并操作的分支，用git cherry-pick合并
+
+    ```shell
+    $ git cherry-pick 62ecb3
+    ```
+  
+  - 合并某个分支上的一系列commits
+
+    首先需要基于feature创建一个新的分支，并指明新分支的最后一个commit：`git checkout -b newbranch 62ecb3`。
+    然后，rebase这个新分支的commit到master（--ontomaster）。76cada^ 指明你想从哪个特定的commit开始。
+    ```shell
+    $ git checkout -b newbranch 62ecb3
+    $ git rebase --onto master 76cada^
+    ```
+
+  > 注意：以上两种操作都是变基操作，不要在已公开的提交(已发布到远程分支的提交)上使用此操作。
+  

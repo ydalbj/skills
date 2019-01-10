@@ -6,7 +6,7 @@
 #
 # see the README
 
-PHPCS_BIN=vendor/bin/phpcs
+PHPCS_BIN=~/.config/composer/vendor/bin/phpcs
 PHPCS_CODING_STANDARD=psr2
 PHPCS_IGNORE=
 TMP_STAGING=".tmp_staging"
