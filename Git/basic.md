@@ -105,14 +105,24 @@
   > 注意：以上两种操作都是变基操作，不要在已公开的提交(已发布到远程分支的提交)上使用此操作。
   
 
-##### 定位错误
+##### 基本命令
 
-  `git bisect`:利用二分法定位引入bug的分支。
+  * `git bisect`:利用二分法定位引入bug的分支。
 
-  1. git bisect start <bad-SHA> <good-SHA>
-  2. git检出中间分支，执行测试。如果没问题，执行`git bisect good`。否则执行`git bisect bad`。
-  3. 循环步骤2，利用二分法，最终定位引入bug的分支。
-  4. 退出bisect，`git bisect reset`。
+    1. git bisect start <bad-SHA> <good-SHA>
+    2. git检出中间分支，执行测试。如果没问题，执行`git bisect good`。否则执行`git bisect bad`。
+    3. 循环步骤2，利用二分法，最终定位引入bug的分支。
+    4. 退出bisect，`git bisect reset`。
   
+  * `git add -p`:暂存部分代码
 
 
+  * `git reflog`:reflog是HEAD每个地方的记录。reflog可以帮助我们恢复以前提交的更改。
+
+    - reflog只是本地的。它不会被推送到遥控器，只包括您的本地历史记录。换句话说，您无法看到其他人的提交的reflog，他们无法看到您的提交。
+    - reflog有时间限制。默认情况下，可访问的提交在reflog中显示90天，但是无法访问的提交（意味着未附加到分支的提交）仅显示30天
+
+  * git reset不仅可以回滚提交，也能向前找回提交。
+
+    - 查看HEAD指出的历史：`git reflog`
+    - 找到以前回滚的提交，重置`git reset --hard <SHA>`
