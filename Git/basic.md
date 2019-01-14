@@ -104,3 +104,15 @@
 
   > 注意：以上两种操作都是变基操作，不要在已公开的提交(已发布到远程分支的提交)上使用此操作。
   
+
+##### 定位错误
+
+  `git bisect`:利用二分法定位引入bug的分支。
+
+  1. git bisect start <bad-SHA> <good-SHA>
+  2. git检出中间分支，执行测试。如果没问题，执行`git bisect good`。否则执行`git bisect bad`。
+  3. 循环步骤2，利用二分法，最终定位引入bug的分支。
+  4. 退出bisect，`git bisect reset`。
+  
+
+
