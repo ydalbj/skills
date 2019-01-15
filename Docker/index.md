@@ -5,7 +5,21 @@
 [安装教程](https://github.com/yeasy/docker_practice/blob/master/install/ubuntu.md)
 [安装脚本](https://github.com/ydalbj/skills/blob/master/Linux/Installation/docker.sh)
 
-### 基本概念
+### 基本基础
+
+  * `docker rm` 删除container
+  * `docker rmi` 删除image
+  * `docker cp` 在host和container之间拷贝文件
+  * `docker commit` 保存改动为新的image
+  * `docker inspect` 查看容器信息
+  * `docker version` 查看client/server api版本等信息。注意与`docker --version`的不同
+  * `docker exec -it <container-id> bash` 进入容器
+  * `docker create` 语法同docker run，创建一个容器，但不启动
+  * image分层：Dockerfile中的每一行都产生一个新层
+  * 构建image的Dockerfile的每一层都是只读的，构建完成后产生一个容器层（container layer），是可写可读的,更改后通过`docker commit`保存修改为新image
+  * 不要把Dockerfile当shell脚本来写，`cd /path/to`,只影响当前行。
+
+
 
   [Docker文档](https://docs.docker.com/get-started/)
 
