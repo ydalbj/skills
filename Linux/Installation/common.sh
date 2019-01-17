@@ -84,8 +84,14 @@ then
   echo "%sudo  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/mysudo | cat > /dev/null
 fi
 
+# 下载工具
 if ! [ -x "$(command -v uget)"]; then
   sudo add-apt-repository ppa:plushuang-tw/uget-stable
-  sudo apt update
-  sudo apt install uget aria2
+  sudo apt-get update
+  sudo apt-get install uget aria2
+fi
+
+# 截图工具
+if ! [ -x "$(command -v flameshot)"]; then
+  sudo apt-get install flameshot
 fi
