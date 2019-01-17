@@ -84,6 +84,16 @@ then
   echo "%sudo  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/mysudo | cat > /dev/null
 fi
 
+# 配置bash vi-mode
+if ! test -e ~/.inputrc
+then
+    cat > ~/.inputrc <<EOF
+set editing-mode vi
+set show-mode-in-prompt on
+EOF
+fi
+
+
 # 下载工具
 if ! [ -x "$(command -v uget)"]; then
   sudo add-apt-repository ppa:plushuang-tw/uget-stable
