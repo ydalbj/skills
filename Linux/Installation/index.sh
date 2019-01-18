@@ -3,6 +3,7 @@
 
 ./common.sh
 ./github-ssh.sh
-./nginx.sh
-./php.sh
+# 改为docker方式
+# ./nginx.sh
+# ./php.sh
 ./docker.sh

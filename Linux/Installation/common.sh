@@ -105,3 +105,13 @@ fi
 if ! [ -x "$(command -v flameshot)"]; then
   sudo apt-get install flameshot
 fi
+
+# 文件夹比较工具
+if ! [ -x "$(command -v meld)"]; then
+  sudo apt install meld 
+fi
+
+# 终端复用工具
+if ! [ -x "$(command -v tmux)"]; then
+  sudo apt install tmux 
+fi
