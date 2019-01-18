@@ -202,3 +202,31 @@
   * Stacks
 
     Stack是一组相互关联的Service，它们共享依赖关系，并且可以协调和规划在一起
+
+##### Docker网络
+
+* Docker 默认网络
+
+  `docker network ls`查看默认网络类型有bridge(默认),host,none
+
+* 创建自定义网络：（设置固定IP）
+
+  启动Docker容器的时候，使用默认的网络是不支持指派固定IP的，如下：
+
+  ```shell
+  $ docker run -itd  --net bridge --ip 172.17.0.10 centos:latest /bin/bash
+
+  6eb1f228cf308d1c60db30093c126acbfd0cb21d76cb448c678bab0f1a7c0df6
+  docker: Error response from daemon: User specified IP address is supported on user defined networks only.
+  ```
+
+  - 创建自定义网络
+
+    ```shell
+    docker network create --subnet=172.18.0.0/16 mynetwork
+    ```
+  - 创建Docker容器,指定ip
+
+    ```shell
+    $ docker run -itd --name networkTest1 --net mynetwork --ip 172.18.0.2 centos:latest /bin/bash
+    ```
