@@ -42,8 +42,20 @@
   select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx_started))>60
   ```
 
-  - completion_type
+  `begin/start transaction` 命令并不是一个事务的起点，在执行到它们之后的第一个操作 InnoDB 表的语句（第一个快照读语句），事务才真正启动。如果你想要马上启动一个事务，可以使用 `start transaction with consistent snapshot` 这个命令。
 
-    > NO_CHAIN (or 0):COMMIT and ROLLBACK are unaffected. This is the default value.
-    > CHAIN (or 1):COMMIT and ROLLBACK are equivalent to COMMIT AND CHAIN and ROLLBACK AND CHAIN, respectively. (A new transaction starts  immediately with the same isolation level as the just-terminated  transaction.)
-    > RELEASE(or 2):COMMIT and ROLLBACK are equivalent to COMMIT RELEASE and ROLLBACK RELEASE, respectively. (The server disconnects  after terminating the transaction.)
+  - `completion_type`参数配置
+
+    `NO_CHAIN` (or 0):COMMIT and ROLLBACK are unaffected. This is the default value.
+
+    `CHAIN` (or 1):`COMMIT`和`ROLLBACK`分别相当于`COMMIT AND CHAIN`和`ROLLBACK AND CHAIN`. (新事务立即以与刚刚终止的事务相同的隔离级别启动。)
+
+    `RELEASE`(or 2):`COMMIT`和`ROLLBACK`分别等同于`COMMIT RELEASE`和`ROLLBACK RELEASE`。 (终止事务后服务器断开连接。)
+
+* 数据隔离级别的实现
+
+  MySQL 两种视图概念
+
+  - 一个是查询语句定义的虚拟表，在调用的时候执行查询语句并生成结果。创建视图的语法是`create view ...`,查询方法和表一样。
+
+  - 另一个是InnoDB在实现MVCC时用到的一致性读视图,即`consistent read view`,用于支持RC(Read Commited)和RR(Repeatable Read)隔离级别的实现。它没有物理结构，作用是事务执行期间用来定义`我能看到什么数据`
