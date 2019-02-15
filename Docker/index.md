@@ -7,6 +7,8 @@
 
 ### 基本基础
 
+##### 基本操作
+
   * `docker rm` 删除container
   * `docker rmi` 删除image
   * `docker cp` 在host和container之间拷贝文件
@@ -19,7 +21,37 @@
   * 构建image的Dockerfile的每一层都是只读的，构建完成后产生一个容器层（container layer），是可写可读的,更改后通过`docker commit`保存修改为新image
   * 不要把Dockerfile当shell脚本来写，`cd /path/to`,只影响当前行。
 
+##### 容器操作
 
+  * 批量删除容器
+
+    1. 查询所有的容器，过滤出Exited状态的容器，列出容器ID，删除这些容器
+
+      ```shell
+      $ docker rm `docker ps -a|grep Exited|awk '{print $1}'`
+      ```
+
+    2. 删除所有未运行的容器（已经运行的删除不了，未运行的就一起被删除了）
+
+      ```shell
+      $ docker rm $(sudo docker ps -a -q)
+      ```
+
+    3. 根据容器的状态，删除Exited状态的容器
+
+      ```shell
+      $ docker rm $(sudo docker ps -qf status=exited)
+      ```
+
+    4. Docker 1.13版本以后，可以使用 docker containers prune 命令，删除孤立的容器
+
+      ```shell
+      $ docker container prune
+      ```
+
+
+
+##### 最佳实践
 
   [Docker文档](https://docs.docker.com/get-started/)
 
