@@ -262,3 +262,9 @@
     ```shell
     $ docker run -itd --name networkTest1 --net mynetwork --ip 172.18.0.2 centos:latest /bin/bash
     ```
+
+### Docker uid,gid
+
+  linux内核负责管理uid和gid空间。容器共享内核，在运行Docker容器的服务器上，整个uids和gids也由单个内核控制。在常见的linux工具中显示的用户名（和组名）不是内核的一部分，而是由外部工具（/etc/passwd，LDAP，Kerberos等）管理。因此，您可能会看到不同的用户名，但即使在不同的容器内，您也无法为同一个uid / gid拥有不同的权限。
+
+  启动容器时，如果不指定`--user`，或者没有在Dockerfile里指定 `USER`。默认以root用户启动容器进程。容器内的root用户和host的容器用户拥有相同的uid，即有相同的权限。需要注意的是，在运行容器时指定用户标志也会覆盖Dockerfile中的该值。
