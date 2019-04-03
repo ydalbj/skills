@@ -11,3 +11,7 @@ PHP Cookbook(PHP经典实例)第三版
     * session_regenerate_id():当用户登录后重新生成会话id
     * 配置session.use_only_cookies=ON（默认开启），仅接受cookie传递的会话id，不接受url传递的会话id
     * 配置session.use_strict_mode=ON(默认disabled，0)，启用后仅已初始化的会话id。
+
+##### 18.2 跨站请求伪造（CSRF）
+
+  在表单提交页面生成一个token，提交表单时验证此token与会话存储的token是否一致。
