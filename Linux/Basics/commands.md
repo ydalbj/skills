@@ -1,5 +1,8 @@
 ## Linux 基本命令
 
+参考资料
+
+[打造高效的工作环境 – SHELL 篇](https://coolshell.cn/articles/19219.html)
 
 ##### Shell命令
 * ps
@@ -36,3 +39,4 @@
     $ echo ‘1′ | sudo tee ip_forward
     # 或
     $ echo ‘1′ | sudo tee ip_forward | cat > /dev/null
+

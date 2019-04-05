@@ -57,3 +57,15 @@ set show-mode-in-prompt on
   alias ssh58cmd="sshpass -p $PS ssh 58cmd"
   ```
 
+##### 命令别名
+  配置 `.zshrc`或`.bashrc`
+  ```
+  alias ..='cd ..'
+  alias ...='cd ..; cd ..'
+  alias ll='ls -alh'
+  alias mkcd='foo(){mkdir -p "$1"; cd "$1"}; foo '
+  alias c='clear'
+  alias install='sudo apt get install'
+  alias update='sudo apt get update; sudo apt upgrade'
+  alias gcm='git ci -m'
+  ```

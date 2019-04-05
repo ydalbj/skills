@@ -66,7 +66,7 @@ fi
 if ! [ -x "$(command -v gnome-tweak-tool)" ]; then
   # install gnome-tweak-tool
   echo "----------install gnome-tweak-tool----------"
-  sudo apt install gnome-tweak-tool
+  sudo apt install gnome-tweak-tool -y
   echo "----------install gnome-tweak-tool----------"
 fi
 
@@ -98,20 +98,28 @@ fi
 if ! [ -x "$(command -v uget)"]; then
   sudo add-apt-repository ppa:plushuang-tw/uget-stable
   sudo apt-get update
-  sudo apt-get install uget aria2
+  sudo apt-get install uget aria2 -y
 fi
 
 # 截图工具
 if ! [ -x "$(command -v flameshot)"]; then
-  sudo apt-get install flameshot
+  sudo apt-get install flameshot -y
 fi
 
 # 文件夹比较工具
 if ! [ -x "$(command -v meld)"]; then
-  sudo apt install meld 
+  sudo apt install meld -y
 fi
 
 # 终端复用工具
 if ! [ -x "$(command -v tmux)"]; then
-  sudo apt install tmux 
+  sudo apt install tmux -y
 fi
+
+sudo apt install htop -y
+
+# 注意更新到最新版本，ubuntu19.04后将会正式变成官方可用
+# https://github.com/sharkdp/fd/releases
+wget https://github.com/sharkdp/fd/releases/download/v7.3.0/fd-musl_7.3.0_amd64.deb
+sudo dpkg -i fd-musl_7.3.0_amd64.deb
+rm fd-musl_7.3.0_amd64.deb
