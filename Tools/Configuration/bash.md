@@ -68,6 +68,7 @@ set show-mode-in-prompt on
   alias install='sudo apt get install'
   alias update='sudo apt get update; sudo apt upgrade'
   alias ga.='git add .'
+  alias gam='git commit --amend'
   alias gcm='git commit -m'
   alias gst='git status'
   alias gdf='git diff'
