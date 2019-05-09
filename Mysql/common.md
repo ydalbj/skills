@@ -1,4 +1,4 @@
-## 常用技巧
+## 基本概念
 
 ##### DML
   DDL(data manipulation language):SELECT、UPDATE、INSERT、DELETE
