@@ -76,4 +76,7 @@ set show-mode-in-prompt on
   alias gpl='git pull'
   alias gtl='git tag -l'
   alias gta='git tag -a'
+  alias gpst='git push && git push --tags'
+  alias cist='composer install'
+  alias cupd='composer update'
   ```
