@@ -1,6 +1,7 @@
 #!/bin/sh
 # Elasticsearch 安装脚本
 # 安装不同版本请替换version变量
+# deprecated 废弃，用docker方式部署更好
 
 version='6.5.2'
 
