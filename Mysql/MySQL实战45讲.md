@@ -70,6 +70,45 @@ InnoDB 的索引模型，表都是根据主键顺序以索引的形式存放的�
 
 > 主键长度越小，普通索引的叶子节点就越小，普通索引占用的空间也就越小。
 
+### 06 | 全局锁和表锁 ：给表加个字段怎么有这么多阻碍？
+
+根据加锁的范围，MySQL 里面的锁大致可以分成全局锁、表级锁和行锁三类。
+
+##### 全局锁
+MySQL 提供了一个加全局读锁的方法，命令是 Flush tables with read lock (FTWRL)
+
+> 全局锁的典型使用场景是，做全库逻辑备份。(支持事务的也可以在可重复读隔离级别下开启一个事务。mysqldump 使用参数　－single-transaction)
+
+##### 表级锁
+MySQL 里面表级别的锁有两种：一种是表锁，一种是元数据锁（meta data lock，MDL)。
+
+* 表锁
+> 表锁的语法是 lock tables … read/write,可以用 unlock tables 主动释放锁，也可以在客户端断开的时候自动释放。
+
+> 在还没有出现更细粒度的锁的时候，表锁是最常用的处理并发的方式。而对于 InnoDB 这种支持行锁的引擎，一般不使用 lock tables 命令来控制并发，毕竟锁住整个表的影响面还是太大。
+
+* 元数据锁
+> 另一类表级的锁是 MDL（metadata lock)。MDL 不需要显式使用，在访问一个表的时候会被自动加上。
+
+* 安全的给热点表加字段
+
+> 可在alter表的时候，增加等待时间，如果在等待的时间内拿到了MDL锁，就可以变更，如果拿不到也不要堵塞业务查询。 之后再重复尝试修改
+
+> Mysql未支持alter等待时间， AliSQL和MariaDb支持
+```sql
+ALTER TABLE tbl_name NOWAIT add column ...
+ALTER TABLE tbl_name WAIT N add column ... 
+```
+
+* OnlineDDL步骤
+
+1. 拿MDL写锁
+2. 降级成MDL读锁
+3. 真正做DDL
+4. 升级成MDL写锁
+5. 释放MDL锁
+
+
 ### 09 | 普通索引和唯一索引,应该怎么选择
 
   * 查询过程
