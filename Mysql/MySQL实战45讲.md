@@ -142,3 +142,22 @@ ALTER TABLE tbl_name WAIT N add column ...
 
 * 隐式类型转换，隐式字符编码转换会在索引字段做函数操作，同样会导致不走树搜索，而是全索引扫描
 
+### 39 | 自增主键为什么不是连续的
+
+##### 自增值 AUTO_INCREMENT 保存
+
+* MyISM引擎的自增值保存在数据文件中
+* InnoDB引擎的自增值保存在内存中,且在MySQL8.0之后,才有了自增值持久化
+  - MySQL8.0 将自增值变更记录在了redo log,重启的时候依靠redo log恢复
+
+##### 自增锁 (Auto-inc lock)
+
+  * 自增锁并不是一个事务锁,而是每次申请完就马上释放
+  * MySQL 5.1.22 版本引入了一个新策略，新增参数 innodb_autoinc_lock_mode,默认值1
+  * innodb_autoinc_lock_mode为0时,采用5.0版本的策略,语句结束才释放
+  * innodb_autoinc_lock_mode为1时:
+    - 普通insert语句,自增锁在申请之后就释放
+    - 类似insert ... select 这样的批量插入语句,自增锁还是要等语句结束才释放
+  * innodb_autoinc_lock_mode为2时,所有语句的自增锁都是申请之后就释放
+
+  - 在生产上，尤其是有 insert … select 这种批量插入数据的场景时，从并发插入数据性能的角度考虑，我建议你这样设置：innodb_autoinc_lock_mode=2 ，并且 binlog_format=row
