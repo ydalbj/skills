@@ -37,14 +37,14 @@ if ! [ -x "$(command -v zsh)" ]; then
   echo "----------Zsh installed----------"
 fi
 
-if ! [ -x "$(command -v fluxgui)" ]; then
-  # install f.lux
-  echo "----------install f.lux----------"
-  sudo add-apt-repository ppa:nathan-renniewaldock/flux
-  sudo apt update
-  sudo apt install fluxgui -y
-  echo "----------f.lux installed----------"
-fi
+# if ! [ -x "$(command -v fluxgui)" ]; then
+#   # install f.lux
+#   echo "----------install f.lux----------"
+#   sudo add-apt-repository ppa:nathan-renniewaldock/flux
+#   sudo apt update
+#   sudo apt install fluxgui -y
+#   echo "----------f.lux installed----------"
+# fi
 
 if ! [ -x "$(command -v composer)" ]; then
   # install composer
@@ -120,6 +120,6 @@ sudo apt install htop -y
 
 # 注意更新到最新版本，ubuntu19.04后将会正式变成官方可用
 # https://github.com/sharkdp/fd/releases
-wget https://github.com/sharkdp/fd/releases/download/v7.3.0/fd-musl_7.3.0_amd64.deb
-sudo dpkg -i fd-musl_7.3.0_amd64.deb
-rm fd-musl_7.3.0_amd64.deb
+# wget https://github.com/sharkdp/fd/releases/download/v7.3.0/fd-musl_7.3.0_amd64.deb
+# sudo dpkg -i fd-musl_7.3.0_amd64.deb
+# rm fd-musl_7.3.0_amd64.deb

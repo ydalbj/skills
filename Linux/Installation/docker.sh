@@ -5,7 +5,7 @@ is_docker=`grep 'download.docker.com' /etc/apt/sources.list.d/*.list`
 
 sudo apt-get remove docker docker-engine docker.io -y
 sudo apt-get update
-sudo apt-get install apt-transport-https ca-certificates curl software-properties-common -y
+sudo apt-get install apt-transport-https ca-certificates curl gnupg software-properties-common -y
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo apt-key fingerprint 0EBFCD88
 source /etc/os-release
@@ -24,11 +24,11 @@ then
     stable"
 fi
 sudo apt-get update
-sudo apt-get install docker-ce -y
+sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 
 # 安装docker-compose
 echo "dont forget to change version of docker-compose and docker-machine"
-sudo curl -L https://github.com/docker/compose/releases/download/1.23.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+sudo curl -L https://github.com/docker/compose/releases/download/1.26.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
 curl -L https://github.com/docker/machine/releases/download/v0.16.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine  && \
