@@ -19,4 +19,5 @@ then
   xclip -sel clip < ~/.ssh/id_rsa.pub
   echo "Copied the contents of the id_rsa.pub file to your clipboard"
   echo "You can paste it to your github account"
+  cat ~/.ssh/id_rsa.pub
 fi
