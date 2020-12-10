@@ -28,12 +28,12 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 
 # 安装docker-compose
 echo "dont forget to change version of docker-compose and docker-machine"
-sudo curl -L https://github.com/docker/compose/releases/download/1.26.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+sudo curl -L https://github.com/docker/compose/releases/download/1.27.4/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
-curl -L https://github.com/docker/machine/releases/download/v0.16.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine  && \
-    chmod +x /tmp/docker-machine && \
-    sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
+# curl -L https://github.com/docker/machine/releases/download/v0.16.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine  && \
+#     chmod +x /tmp/docker-machine && \
+#     sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
 
 
 # 默认情况下，docker 命令会使用 Unix socket 与 Docker 引擎通讯。
