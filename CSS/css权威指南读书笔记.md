@@ -53,3 +53,14 @@
     box-decoration-break: slice;  /* 默认值 表示各个盒子断开的部分如同切割开一般。*/
     box-decoration-break: clone; /*表示断开的各个盒子样式独自渲染。*/
     ```
+
+
+### Chapter 8. Padding,Borders,Outlines, and Margins
+
+##### Borders
+
+`border-style`默认值为`none`,如何声明`h1{border-width: 10px;}`将不会显示任何边框
+
+透明边框：`border-color: transparent`
+利用`transparent`,使用边框就像增加了额外的内边距一样；此外，还有一个好处就是能在你需要的时候使其可见。这张透明的边框相当于内边距，因为元素的背景会延伸到边框区。
+
